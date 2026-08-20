@@ -1,0 +1,36 @@
+name: Ubuntu Quick Start
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  quick:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: سلام دنیا
+        run: echo "سلام از اوبونتو! 🐧"
+      
+      - name: اطلاعات سیستم
+        run: |
+          lsb_release -a
+          uname -a
+          free -h
+          df -h
+      
+      - name: نصب یک پکیج
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y tree
+          tree .
+      
+      - name: اجرای اسکریپت
+        run: |
+          echo '#!/bin/bash' > test.sh
+          echo 'echo "اسکریپت با موفقیت اجرا شد!"' >> test.sh
+          chmod +x test.sh
+          ./test.sh
